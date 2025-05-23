@@ -12,7 +12,7 @@
 <body>
     <nav>
         <div class="nav-content">
-            <a href="index.html" class="back-button">
+            <a href="javascript:history.back()" class="back-button">
                 <i class="fas fa-arrow-left"></i>
                 <span>Retour</span>
             </a>
@@ -43,7 +43,7 @@
             </div>
         </header>
 
-        <main class="project-content">
+        <div class="project-main-content">
             <aside class="project-sidebar">
                 <div class="sidebar-section">
                     <h3>Technologies</h3>
@@ -75,7 +75,7 @@
                 </div>
             </aside>
 
-            <section class="project-details">
+            <main class="project-details">
                 <div class="detail-section">
                     <h2>🎯 Contexte</h2>
                     <p>Description détaillée du contexte du projet, pourquoi il a été initié, et quels étaient les objectifs principaux.</p>
@@ -152,10 +152,23 @@
                         </li>
                     </ul>
                 </div>
-            </section>
-        </main>
+            </main>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2024 - Tous droits réservés</p>
+                <div class="footer-links">
+                    <a href="index.html#home">Accueil</a>
+                    <a href="index.html#projects">Projets</a>
+                    <a href="index.html#experience">Expérience</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <p>Réalisé avec ❤️ par <a href="index.html" class="footer-name">Azertymj</a></p>
+            </div>
+        </footer>
     </div>
 
-    <script src="project-view.js"></script>
+    <script src="script.js"></script>
 </body>
 </html> 

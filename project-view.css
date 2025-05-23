@@ -41,78 +41,78 @@ nav {
 }
 
 .project-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+.project-header {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.project-cover {
+    width: 100%;
+    height: 50vh;
+    min-height: 300px;
+    max-height: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-intro {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
 
-.project-header {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-    margin-bottom: 3rem;
-}
-
-.project-cover {
-    flex: 1.2;
-    min-width: 0;
-}
-.project-cover img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
-}
-
-.project-intro {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-.project-intro h1 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
 .project-meta {
     display: flex;
-    gap: 1.5rem;
-    color: var(--secondary-color);
-    font-size: 1rem;
+    gap: 2rem;
+    margin-top: 1.5rem;
 }
+
 .meta-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: var(--secondary-color);
 }
 
-.project-content {
+.project-main-content {
+    flex: 1;
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
 }
 
 .project-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.sidebar-section {
     background: var(--card-bg);
-    padding: 2rem 1.5rem;
-    border-radius: 16px;
-    min-width: 240px;
-    max-width: 300px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    position: sticky;
-    top: 2rem;
-    height: fit-content;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
+
 .sidebar-section h3 {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    margin-bottom: 0.7rem;
-    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
+
 .tech-stack {
     display: flex;
     flex-wrap: wrap;
@@ -151,25 +151,27 @@ nav {
 }
 
 .project-details {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    flex: 1;
 }
+
+.detail-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
 .detail-section h2 {
-    font-size: 1.4rem;
-    color: #ff4d00;
-    margin-bottom: 0.7rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
+
 .detail-section p {
     color: var(--secondary-color);
     font-size: 1.05rem;
     line-height: 1.7;
 }
+
 .challenges-list, .improvement-list {
     list-style: none;
     padding: 0;
@@ -198,94 +200,131 @@ nav {
     font-size: 1.3rem;
     margin-top: 0.2rem;
 }
+
 .solution-gallery {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
-    margin-top: 1.2rem;
+    margin-top: 2rem;
 }
+
 .solution-gallery img {
-    width: 48%;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 100%;
+    border-radius: 12px;
 }
+
 .results-grid {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
+
 .result-item {
-    background: linear-gradient(90deg, #ff4d0022 0%, #2d2d2d11 100%);
-    border-left: 4px solid #ff4d00;
-    border-radius: 8px;
-    padding: 1.2rem 1.5rem;
-    flex: 1;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 16px;
 }
+
 .result-item h4 {
     color: var(--primary-color);
     font-size: 1.05rem;
     margin-bottom: 0.3rem;
     font-weight: 600;
 }
+
 .result-item p {
     color: var(--secondary-color);
     font-size: 1rem;
 }
 
-@media (max-width: 1024px) {
-    .project-header {
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: flex-start;
-    }
-    .project-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .project-sidebar {
-        max-width: 100%;
-        width: 100%;
-        position: relative;
-        top: 0;
-    }
-    .solution-gallery {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .solution-gallery img {
-        width: 100%;
-    }
-    .results-grid {
-        flex-direction: column;
-        gap: 1rem;
-    }
+.improvement-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-@media (max-width: 700px) {
-    .project-container {
-        padding: 0.5rem;
+.improvement-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.improvement-list i {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background: var(--background-color);
+    border-radius: 12px;
+}
+
+footer {
+    margin-top: 4rem;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .project-main-content {
+        flex-direction: column;
     }
-    .project-header {
-        gap: 1rem;
-    }
-    .project-cover img {
-        height: 180px;
-    }
+
     .project-sidebar {
-        padding: 1rem 0.5rem;
+        width: 100%;
+    }
+
+    .sidebar-section {
+        margin-bottom: 1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .project-title {
-        font-size: 3rem;
+    .project-container {
+        padding-top: 60px;
     }
-    
-    .project-image {
-        height: 300px;
+
+    .project-intro {
+        padding: 1.5rem;
     }
-    
-    .project-view {
+
+    .project-main-content {
+        padding: 0 1.5rem;
+    }
+
+    .project-meta {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .detail-section {
+        padding: 1.5rem;
+    }
+
+    .detail-section h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-container {
+        padding-top: 50px;
+    }
+
+    .project-cover {
+        min-height: 200px;
+    }
+
+    .project-intro {
         padding: 1rem;
+    }
+
+    .project-main-content {
+        padding: 0 1rem;
+    }
+
+    .detail-section {
+        padding: 1rem;
+    }
+
+    .detail-section h2 {
+        font-size: 1.5rem;
     }
 } 

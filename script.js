@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Écouteur d'événement pour le défilement
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Vérification initiale
 
     // Animation des boutons de projet
@@ -84,12 +83,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gestion du formulaire
     const form = document.querySelector('.contact-form');
+    const notification = document.getElementById('notification');
+
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Ici vous pouvez ajouter votre logique d'envoi de formulaire
-            alert('Message envoyé ! (Simulation)');
-            form.reset();
+            const submitButton = form.querySelector('.form-submit');
+            const originalText = submitButton.innerHTML;
+            
+            try {
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                submitButton.disabled = true;
+                
+                // Envoi du formulaire via Formspree
+                await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                // Afficher la notification
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+                
+                // Réinitialiser le formulaire
+                form.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+            } catch (error) {
+                // En cas d'erreur
+                notification.querySelector('i').className = 'fas fa-exclamation-circle';
+                notification.querySelector('i').style.color = '#ff4d00';
+                notification.querySelector('span').textContent = 'Erreur lors de l\'envoi du message';
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.querySelector('i').className = 'fas fa-check-circle';
+                    notification.querySelector('i').style.color = '#4CAF50';
+                    notification.querySelector('span').textContent = 'Message envoyé avec succès !';
+                }, 3000);
+                
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
         });
     }
 });
@@ -137,26 +179,63 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-// Navigation active
+// Gestion de la navigation au scroll
+const nav = document.querySelector('nav');
+let lastScrollTop = 0;
+const scrollThreshold = 50;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Si on défile vers le bas et qu'on a dépassé 100px
+    if (currentScroll > lastScrollTop && currentScroll > 100) {
+        nav.classList.add('nav-hidden');
+    } 
+    // Si on défile vers le haut
+    else if (currentScroll < lastScrollTop) {
+        nav.classList.remove('nav-hidden');
+    }
+    
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+}, { passive: true });
+
+// Gestion des liens de navigation actifs
 const navLinks = document.querySelectorAll('.nav-content a');
 const sections = document.querySelectorAll('section');
 
-window.addEventListener('scroll', () => {
-    let current = '';
+function setActiveLink() {
+    const currentPos = window.scrollY + 100;
     
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         
-        if (scrollY >= sectionTop - 300) {
-            current = section.getAttribute('id');
+        if (currentPos >= sectionTop && currentPos < sectionTop + sectionHeight) {
+            const targetId = section.getAttribute('id');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${targetId}`) {
+                    link.classList.add('active');
+                }
+            });
         }
     });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-            link.classList.add('active');
+}
+
+window.addEventListener('scroll', setActiveLink, { passive: true });
+window.addEventListener('load', setActiveLink);
+
+// Smooth scroll pour les liens de navigation
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            targetSection.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     });
 }); 
