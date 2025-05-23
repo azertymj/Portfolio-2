@@ -36,7 +36,7 @@ Le site est optimisé pour :
 
 1. Clonez le repository
 ```bash
-git clone https://github.com/votre-username/portfolio.git
+git clone https://github.com/Azertymj/portfolio.git
 ```
 
 2. Ouvrez le dossier
@@ -80,6 +80,5 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 ## 🤝 Contact
 
 Pour toute question ou suggestion, n'hésitez pas à me contacter :
-- [Votre Email]
+- hendrixmarvinmwouabo@gmail.com
 - [Votre LinkedIn]
-- [Votre Twitter] 
